@@ -1,0 +1,7 @@
+Rules of playing Sudoku.
+To win the game of Sudoku the GameBoard must meet all of the following requirements:
+1)Each cell must contain a positive integer from 1 to 9 inclusive.
+2)Each vertical row must contain all positive integers from 1 to 9 inclusive with no duplicate integers.
+3)Each horizontal row must contain all positive integers from 1 to 9 inclusive with no duplicate integers.
+4)Each 3 by 3 tile must contain all positive integers from 1 to 9 inclusive with no duplicate integers.
+ 
