@@ -252,20 +252,27 @@ public class GameBoard {
         outputStream.close();
     }
 
-    public void loadProgress(String file) throws IOException {
-        FileReader readIt = new FileReader(file);
-        BufferedReader inputStream = new BufferedReader(readIt);
-        for(int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                this.gameMatrix[i][j].setNumber((char) inputStream.read());
-                if(inputStream.read() == 't') {
-                    this.gameMatrix[i][j].setEditable(true);
-                }else{
-                    this.gameMatrix[i][j].setEditable(false);
+    public boolean loadProgress(String file) throws IOException {
+        boolean success = true;
+        try {
+            FileReader readIt = new FileReader(file);
+            BufferedReader inputStream = new BufferedReader(readIt);
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    this.gameMatrix[i][j].setNumber((char) inputStream.read());
+                    if (inputStream.read() == 't') {
+                        this.gameMatrix[i][j].setEditable(true);
+                    } else {
+                        this.gameMatrix[i][j].setEditable(false);
+                    }
                 }
             }
+            inputStream.close();
+        }catch(FileNotFoundException e){
+            this.PopulateGameBoard();
+            success = false;
         }
-        inputStream.close();
+        return success;
     }
 
     public boolean NoBlanks() {

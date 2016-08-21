@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -15,15 +16,23 @@ public class SudokuGame {
         do {
             System.out.println(" ~~ Please choose a difficulty for a new game or load a previous game ~~");
             System.out.println("    1) Easy\n    2) Medium\n    3) Hard\n    4) Load Previous Game");
-            difficulty = kb.nextInt();
+            try {
+                difficulty = kb.nextInt();
+            }catch (InputMismatchException e){
+                difficulty = 5;
+            }
+            kb.nextLine();
         } while (difficulty > 4 ||difficulty < 1);
         if(difficulty != 4) {
             GB.PopulateGameBoard();
             Solved.CopyMatrix(GB);
             GB.HideCells(difficulty + 1);
-        }else{
-            GB.loadProgress("saveProgress.txt");
-            Solved.loadProgress("saveSolved.txt");
+        }else {
+            if (GB.loadProgress("saveProgress.txt")) {
+                Solved.loadProgress("saveSolved.txt");
+            }else{
+                Solved.CopyMatrix(GB);
+            }
         }
         boolean win = false;
     boolean quit = false;
