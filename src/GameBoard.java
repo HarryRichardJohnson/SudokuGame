@@ -1,6 +1,4 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -238,24 +236,36 @@ public class GameBoard {
         }
     return valid;
     }
-    public void saveProgress() throws IOException {
-        FileWriter writeIt = new FileWriter("saveProgress.txt");
+    public void saveProgress(String file) throws IOException {
+        FileWriter writeIt = new FileWriter(file);
         BufferedWriter outputStream = new BufferedWriter(writeIt);
-        for(int i = 0; i < 9; i++){
-            for(int j = 0; j < 9; j++){
+        for(int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                 outputStream.write(this.gameMatrix[i][j].getNumber());
-                outputStream.newLine();
-                outputStream.write((char)(this.gameMatrix[i][j].getTile()+48));
-                outputStream.newLine();
-                if(this.gameMatrix[i][j].isEditable()) {
+                if (this.gameMatrix[i][j].isEditable()) {
                     outputStream.write("t");
-                }else if(!this.gameMatrix[i][j].isEditable()){
+                } else {
                     outputStream.write("f");
                 }
-                outputStream.newLine();
             }
         }
         outputStream.close();
+    }
+
+    public void loadProgress(String file) throws IOException {
+        FileReader readIt = new FileReader(file);
+        BufferedReader inputStream = new BufferedReader(readIt);
+        for(int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                this.gameMatrix[i][j].setNumber((char) inputStream.read());
+                if(inputStream.read() == 't') {
+                    this.gameMatrix[i][j].setEditable(true);
+                }else{
+                    this.gameMatrix[i][j].setEditable(false);
+                }
+            }
+        }
+        inputStream.close();
     }
 
     public boolean NoBlanks() {

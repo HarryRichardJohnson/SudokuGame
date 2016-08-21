@@ -9,18 +9,22 @@ public class SudokuGame {
         GameBoard GB = new GameBoard();
         GameBoard Solved = new GameBoard();
         GB.AssignTiles();
-        System.out.println();
-        GB.PopulateGameBoard();
-        Solved.CopyMatrix(GB);
         Scanner kb = new Scanner(System.in);
         int difficulty;
         System.out.println("~~~ Welcome to the Game of Sudoku ~~~");
         do {
-            System.out.println(" ~~ Please choose a difficulty ~~");
-            System.out.println("    1) Easy\n    2) Medium\n    3) Hard");
+            System.out.println(" ~~ Please choose a difficulty for a new game or load a previous game ~~");
+            System.out.println("    1) Easy\n    2) Medium\n    3) Hard\n    4) Load Previous Game");
             difficulty = kb.nextInt();
-        } while (difficulty > 3 ||difficulty < 1);
-        GB.HideCells(difficulty+1);
+        } while (difficulty > 4 ||difficulty < 1);
+        if(difficulty != 4) {
+            GB.PopulateGameBoard();
+            Solved.CopyMatrix(GB);
+            GB.HideCells(difficulty + 1);
+        }else{
+            GB.loadProgress("saveProgress.txt");
+            Solved.loadProgress("saveSolved.txt");
+        }
         boolean win = false;
     boolean quit = false;
         int menuChoice;
@@ -55,7 +59,8 @@ public class SudokuGame {
                     readRules();
                     break;
                 case 6:
-                    GB.saveProgress();
+                    GB.saveProgress("saveProgress.txt");
+                    Solved.saveProgress("saveSolved.txt");
                     break;
                 case 7:
                     quit = true;
