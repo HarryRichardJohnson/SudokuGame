@@ -32,10 +32,12 @@ public class SudokuGame {
             if(file.length() == 162) {
                 if (GB.loadProgress("saveProgress.txt")) {
                     Solved.loadProgress("saveSolved.txt");
-                } else {
+                }
+            }else {
+                    System.out.println("No Save exists, generating a random board");
+                    GB.PopulateGameBoard();
                     Solved.CopyMatrix(GB);
                     GB.HideCells(3);
-                }
             }
         }
         boolean win = false;
