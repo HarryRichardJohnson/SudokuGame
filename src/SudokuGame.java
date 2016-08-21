@@ -28,10 +28,14 @@ public class SudokuGame {
             Solved.CopyMatrix(GB);
             GB.HideCells(difficulty + 1);
         }else {
-            if (GB.loadProgress("saveProgress.txt")) {
-                Solved.loadProgress("saveSolved.txt");
-            }else{
-                Solved.CopyMatrix(GB);
+            File file = new File("saveProgress.txt");
+            if(file.length() == 162) {
+                if (GB.loadProgress("saveProgress.txt")) {
+                    Solved.loadProgress("saveSolved.txt");
+                } else {
+                    Solved.CopyMatrix(GB);
+                    GB.HideCells(3);
+                }
             }
         }
         boolean win = false;
@@ -47,7 +51,11 @@ public class SudokuGame {
                     "5)Rules for winning Sudoku\n    "+
                     "6)Save current game progress\n    "+
                     "7)Quit");
-            menuChoice = kb.nextInt();
+            try {
+                menuChoice = kb.nextInt();
+            }catch(InputMismatchException e){
+                menuChoice = 0;
+            }
             switch (menuChoice){
                 case 1:
                     GB.PrintGameBoard();
@@ -85,12 +93,16 @@ public class SudokuGame {
     }
 
     private static void readRules() throws IOException {
-        FileReader readIt = new FileReader("Rules.txt");
-        BufferedReader inputStream = new BufferedReader(readIt);
-        String line;
-        while((line = inputStream.readLine())!= null) {
-            System.out.println(line);
+        try {
+            FileReader readIt = new FileReader("Rules.txt");
+            BufferedReader inputStream = new BufferedReader(readIt);
+            String line;
+            while ((line = inputStream.readLine()) != null) {
+                System.out.println(line);
+            }
+            inputStream.close();
+        }catch(FileNotFoundException e){
+            System.out.println("Cannot find Rules file");
         }
-        inputStream.close();
     }
 }

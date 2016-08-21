@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -212,16 +213,20 @@ public class GameBoard {
         }
     }
     public void SolveTile(GameBoard gb){
-        System.out.println("Which tile would you like to solve?");
-        System.out.println("Enter the X value of the Tile:");
-        Scanner kb = new Scanner(System.in);
-        int xInt = kb.nextInt();
-        System.out.println("Enter the Y value of the Tile:");
-        int yInt = kb.nextInt();
-        System.out.println("What number would you like to apply to this Tile?");
-        int input = kb.nextInt();
-        if(gb.gameMatrix[yInt-1][xInt-1].isEditable()){
-            gb.gameMatrix[yInt-1][xInt-1].setNumber((char)(input+48));
+        try {
+            System.out.println("Which tile would you like to solve?");
+            System.out.println("Enter the X value of the Tile:");
+            Scanner kb = new Scanner(System.in);
+            int xInt = kb.nextInt();
+            System.out.println("Enter the Y value of the Tile:");
+            int yInt = kb.nextInt();
+            System.out.println("What number would you like to apply to this Tile?");
+            int input = kb.nextInt();
+            if (gb.gameMatrix[yInt - 1][xInt - 1].isEditable()) {
+                gb.gameMatrix[yInt - 1][xInt - 1].setNumber((char) (input + 48));
+            }
+        }catch(InputMismatchException e){
+            System.out.println("Input Mismatch returning to Menu");
         }
     }
     public boolean ValidBoardInPlay() {
