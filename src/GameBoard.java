@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -234,6 +237,25 @@ public class GameBoard {
             }
         }
     return valid;
+    }
+    public void saveProgress() throws IOException {
+        FileWriter writeIt = new FileWriter("saveProgress.txt");
+        BufferedWriter outputStream = new BufferedWriter(writeIt);
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9; j++){
+                outputStream.write(this.gameMatrix[i][j].getNumber());
+                outputStream.newLine();
+                outputStream.write((char)(this.gameMatrix[i][j].getTile()+48));
+                outputStream.newLine();
+                if(this.gameMatrix[i][j].isEditable()) {
+                    outputStream.write("t");
+                }else if(!this.gameMatrix[i][j].isEditable()){
+                    outputStream.write("f");
+                }
+                outputStream.newLine();
+            }
+        }
+        outputStream.close();
     }
 
     public boolean NoBlanks() {

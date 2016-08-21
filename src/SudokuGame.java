@@ -32,7 +32,8 @@ public class SudokuGame {
                     " some games can be won many ways)\n    " +
                     "4)Check for a Win(do this if you think you have all the tiles correct)\n    " +
                     "5)Rules for winning Sudoku\n    "+
-                    "6)Quit");
+                    "6)Save current game progress\n    "+
+                    "7)Quit");
             menuChoice = kb.nextInt();
             switch (menuChoice){
                 case 1:
@@ -51,15 +52,12 @@ public class SudokuGame {
                     }
                     break;
                 case 5:
-                    FileReader readIt = new FileReader("Rules.txt");
-                    BufferedReader inputStream = new BufferedReader(readIt);
-                    String line;
-                    while((line = inputStream.readLine())!= null) {
-                        System.out.println(line);
-                    }
-                    inputStream.close();
+                    readRules();
                     break;
                 case 6:
+                    GB.saveProgress();
+                    break;
+                case 7:
                     quit = true;
                     break;
             }
@@ -70,5 +68,15 @@ public class SudokuGame {
             System.out.println("you chose to quit, this is the solved board if you were wondering");
             Solved.PrintGameBoard();
         }
+    }
+
+    private static void readRules() throws IOException {
+        FileReader readIt = new FileReader("Rules.txt");
+        BufferedReader inputStream = new BufferedReader(readIt);
+        String line;
+        while((line = inputStream.readLine())!= null) {
+            System.out.println(line);
+        }
+        inputStream.close();
     }
 }
