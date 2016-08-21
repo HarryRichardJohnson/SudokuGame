@@ -111,7 +111,7 @@ public class GameBoard {
     public void PrintTiles() {
         //prints the array to the console
         //prints the tile attribute, for debugging and development purposes
-        //likely not used in finally product
+        //not used in finally product
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 System.out.print(this.gameMatrix[x][y].getTile() + " ");
@@ -220,8 +220,11 @@ public class GameBoard {
             int xInt = kb.nextInt();
             System.out.println("Enter the Y value of the Tile:");
             int yInt = kb.nextInt();
-            System.out.println("What number would you like to apply to this Tile?");
-            int input = kb.nextInt();
+            int input = 0;
+            do {
+                System.out.println("What number would you like to apply to this Tile?");
+                input = kb.nextInt();
+            }while(input < 1 || input > 9);
             if (gb.gameMatrix[yInt - 1][xInt - 1].isEditable()) {
                 gb.gameMatrix[yInt - 1][xInt - 1].setNumber((char) (input + 48));
             }

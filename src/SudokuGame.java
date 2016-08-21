@@ -58,6 +58,7 @@ public class SudokuGame {
             }catch(InputMismatchException e){
                 menuChoice = 0;
             }
+            kb.nextLine();
             switch (menuChoice){
                 case 1:
                     GB.PrintGameBoard();
