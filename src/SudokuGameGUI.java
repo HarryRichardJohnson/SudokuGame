@@ -11,21 +11,50 @@ public class SudokuGameGUI{
         GameBoard GB = new GameBoard();
         GameBoard Solved = new GameBoard();
         GB.AssignTiles();
-        int difficulty;
         JFrame GUI = new JFrame("Sudoku");
+        GUI.setSize(1000,1000);
         GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GUI.setLayout(new FlowLayout());
+        JPanel DiffPanel = new JPanel();
+        GUI.setSize(1200,800);
         JLabel Difficulty = new JLabel("Choose Difficulty:");
         JButton Diff1 = new JButton("1");
-        Diff1.addActionListener(MyActionListener);
+        Diff1.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    GB.HideCells(2);
+                    GUI.remove(DiffPanel);
+                    SwingUtilities.updateComponentTreeUI(GUI);
+                }
+            }
+        );
         JButton Diff2 = new JButton("2");
+        Diff2.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    GB.HideCells(3);
+                    GUI.remove(DiffPanel);
+                    SwingUtilities.updateComponentTreeUI(GUI);
+                }
+            }
+        );
         JButton Diff3 = new JButton("3");
-        GUI.add(Difficulty);
-        GUI.add(Diff1);
-        GUI.add(Diff2);
-        GUI.add(Diff3);
+        Diff3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    GB.HideCells(4);
+                    GUI.remove(DiffPanel);
+                    SwingUtilities.updateComponentTreeUI(GUI);
+                }
+            }
+        );
+        DiffPanel.add(Difficulty);
+        DiffPanel.add(Diff1);
+        DiffPanel.add(Diff2);
+        DiffPanel.add(Diff3);
+        GUI.add(DiffPanel);
         GUI.pack();
+        GB.PopulateGameBoard();
+        Solved.CopyMatrix(GB);
         GUI.setVisible(true);
+        //JPanel()
 
     }
 }
