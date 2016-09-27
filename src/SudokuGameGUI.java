@@ -50,7 +50,6 @@ public class SudokuGameGUI{
         DiffPanel.add(Diff2);
         DiffPanel.add(Diff3);
         GUI.add(DiffPanel);
-        GUI.pack();
         GB.PopulateGameBoard();
         Solved.CopyMatrix(GB);
         GUI.setVisible(true);
