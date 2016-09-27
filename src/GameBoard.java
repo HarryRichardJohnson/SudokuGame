@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Random;
@@ -304,4 +306,15 @@ public class GameBoard {
     }
         return bool;
     }
-}
+
+    public JPanel PrintGameBoardGUI() {
+        JPanel grid = new JPanel();
+        grid.setLayout(new GridLayout(9,9));
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                    grid.add(new JLabel(String.valueOf(this.gameMatrix[i][j].getNumber())));
+            }
+        }
+        return grid;
+        }
+    }
