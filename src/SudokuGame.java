@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -6,7 +8,27 @@ import java.util.Scanner;
  * Created by HarryJohnson on 11/08/2016.
  */
 public class SudokuGame {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+        GameBoard GB = new GameBoard();
+        GameBoard Solved = new GameBoard();
+        GB.AssignTiles();
+        GB.PopulateGameBoard();
+        Solved.CopyMatrix(GB);
+        JFrame SFrame = new JFrame("Sudoku");
+        SFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JButton Update = new JButton("Click to win");
+        Update.setSize(100,100);
+        JLabel board11 = new JLabel(String.valueOf(GB.gameMatrix[1][1].getNumber()), JLabel.CENTER);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int)screenSize.getWidth();
+        int height = (int)screenSize.getHeight();
+        SFrame.setSize(width,height-50);
+        SFrame.add(board11);
+        SFrame.add(Update);
+        SFrame.pack();
+        SFrame.setVisible(true);
+    }
+   /* public static void main(String[] args) throws IOException {
         GameBoard GB = new GameBoard();
         GameBoard Solved = new GameBoard();
         GB.AssignTiles();
@@ -107,5 +129,5 @@ public class SudokuGame {
         }catch(FileNotFoundException e){
             System.out.println("Cannot find Rules file");
         }
-    }
+    }*/
 }

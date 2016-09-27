@@ -7,7 +7,7 @@ import java.util.Scanner;
  * Created by HarryJohnson on 11/08/2016.
  */
 public class GameBoard {
-    private SudokuCell[][] gameMatrix;
+    public SudokuCell[][] gameMatrix;
 
     public GameBoard() {
         //constructor for the gameboard
