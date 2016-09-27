@@ -1,5 +1,8 @@
 import javax.swing.*;
+import javax.xml.stream.Location;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Random;
@@ -309,10 +312,16 @@ public class GameBoard {
 
     public JPanel PrintGameBoardGUI() {
         JPanel grid = new JPanel();
-        grid.setLayout(new GridLayout(9,9));
+        grid.setLayout(new GridLayout(9,9,2,1));
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                    grid.add(new JLabel(String.valueOf(this.gameMatrix[i][j].getNumber())));
+                JButton Button = new JButton(String.valueOf(this.gameMatrix[i][j].getNumber()));
+                grid.add(Button);
+                Button.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e){
+                        grid.add(new JLabel("test"));
+                    }
+                });
             }
         }
         return grid;
