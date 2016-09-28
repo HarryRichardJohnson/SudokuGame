@@ -16,7 +16,6 @@ public class SudokuGameGUI{
         GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GUI.setLayout(new FlowLayout());
         JPanel DiffPanel = new JPanel();
-        GUI.setSize(1200,800);
         JLabel Difficulty = new JLabel("Choose Difficulty:");
         JButton Diff1 = new JButton("1");
         Diff1.addActionListener(new ActionListener(){
@@ -25,6 +24,7 @@ public class SudokuGameGUI{
                     GUI.remove(DiffPanel);
                     SwingUtilities.updateComponentTreeUI(GUI);
                     GUI.add(GB.PrintGameBoardGUI());
+                    GB.menuGUI(GUI);
                 }
             }
         );
@@ -35,6 +35,7 @@ public class SudokuGameGUI{
                     GUI.remove(DiffPanel);
                     SwingUtilities.updateComponentTreeUI(GUI);
                     GUI.add(GB.PrintGameBoardGUI());
+                    GB.menuGUI(GUI);
                 }
             }
         );
@@ -45,6 +46,8 @@ public class SudokuGameGUI{
                     GUI.remove(DiffPanel);
                     SwingUtilities.updateComponentTreeUI(GUI);
                     GUI.add(GB.PrintGameBoardGUI());
+                    GB.menuGUI(GUI);
+
                 }
             }
         );

@@ -316,14 +316,39 @@ public class GameBoard {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 JButton Button = new JButton(String.valueOf(this.gameMatrix[i][j].getNumber()));
+                Button.setEnabled(false);
                 grid.add(Button);
-                Button.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e){
-                        grid.add(new JLabel("test"));
-                    }
-                });
             }
         }
         return grid;
         }
+
+    public void menuGUI(JFrame GUI) {
+        JPanel menu = new JPanel();
+        JButton SolveTile = new JButton("Solve Tile");
+        SolveTile.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFrame SolveFrame = new JFrame("Enter Number:");
+                SolveFrame.setLayout(new FlowLayout());
+                JLabel X = new JLabel("Enter X");
+                JTextField x = new JTextField(5);
+                SolveFrame.add(X);
+                SolveFrame.add(x);
+                JLabel Y = new JLabel("Enter Y");
+                JTextField y = new JTextField(5);
+                SolveFrame.add(Y);
+                SolveFrame.add(y);
+                JLabel Num = new JLabel("Enter New Number");
+                JTextField num = new JTextField(5);
+                SolveFrame.add(Num);
+                SolveFrame.add(num);
+                JButton Solve = new JButton("Solve");
+                SolveFrame.add(Solve);
+                SolveFrame.pack();
+                SolveFrame.setVisible(true);
+            }
+        });
+        menu.add(SolveTile);
+        GUI.add(menu);
     }
+}
