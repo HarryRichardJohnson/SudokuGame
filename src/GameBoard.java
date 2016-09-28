@@ -315,6 +315,7 @@ public class GameBoard {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 JButton Button = new JButton(String.valueOf(this.gameMatrix[i][j].getNumber()));
+                Button.setName(i+j+"");
                 Button.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent e)
@@ -333,6 +334,14 @@ public class GameBoard {
                             {
                                   Button.setText(Num.getText());
                                 SolveFrame.setVisible(false);
+                                System.out.println(Button.getName());
+                                char[] CharArray;
+                                CharArray = Button.getName().toCharArray();
+                                char x = CharArray[0];
+                                char y = CharArray[1];
+                                char[] numCharArray = Num.getText().toCharArray();
+                                char num = numCharArray[0];
+                                GBAssignment(x, y, num);
                             }
                         });
                         SwingUtilities.updateComponentTreeUI(GUI);
@@ -345,11 +354,9 @@ public class GameBoard {
         }
         return grid;
         }
-    public void updateGB(JPanel grid){
-        for(int i = 0; i < 9; i++){
-            for(int j = 0; j < 9; j++){
-                grid.contains(i,j);
-            }
-        }
+
+    private void GBAssignment(char x, char y, char num) {
+        this.gameMatrix[x][y].setNumber(num);
+        PrintGameBoard();
     }
 }
