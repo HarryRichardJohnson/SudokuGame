@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.xml.stream.Location;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -310,45 +309,47 @@ public class GameBoard {
         return bool;
     }
 
-    public JPanel PrintGameBoardGUI() {
+    public JPanel PrintGameBoardGUI(JFrame GUI) {
         JPanel grid = new JPanel();
         grid.setLayout(new GridLayout(9,9,2,1));
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 JButton Button = new JButton(String.valueOf(this.gameMatrix[i][j].getNumber()));
-                Button.setEnabled(false);
+                Button.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        JFrame SolveFrame = new JFrame("Enter Number:");
+                        SolveFrame.setVisible(true);
+                        SolveFrame.setLayout(new FlowLayout());
+                        JTextField Num = new JTextField(3);
+                        SolveFrame.add(Num);
+                        JButton Confirm = new JButton("Confirm");
+                        SolveFrame.add(Confirm);
+                        SolveFrame.pack();
+                        Confirm.addActionListener(new ActionListener()
+                        {
+                            public void actionPerformed(ActionEvent e)
+                            {
+                                  Button.setText(Num.getText());
+                                SolveFrame.setVisible(false);
+                            }
+                        });
+                        SwingUtilities.updateComponentTreeUI(GUI);
+                    }
+                });
+
+                //Button.setEnabled(false);
                 grid.add(Button);
             }
         }
         return grid;
         }
-
-    public void menuGUI(JFrame GUI) {
-        JPanel menu = new JPanel();
-        JButton SolveTile = new JButton("Solve Tile");
-        SolveTile.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JFrame SolveFrame = new JFrame("Enter Number:");
-                SolveFrame.setLayout(new FlowLayout());
-                JLabel X = new JLabel("Enter X");
-                JTextField x = new JTextField(5);
-                SolveFrame.add(X);
-                SolveFrame.add(x);
-                JLabel Y = new JLabel("Enter Y");
-                JTextField y = new JTextField(5);
-                SolveFrame.add(Y);
-                SolveFrame.add(y);
-                JLabel Num = new JLabel("Enter New Number");
-                JTextField num = new JTextField(5);
-                SolveFrame.add(Num);
-                SolveFrame.add(num);
-                JButton Solve = new JButton("Solve");
-                SolveFrame.add(Solve);
-                SolveFrame.pack();
-                SolveFrame.setVisible(true);
+    public void updateGB(JPanel grid){
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9; j++){
+                grid.contains(i,j);
             }
-        });
-        menu.add(SolveTile);
-        GUI.add(menu);
+        }
     }
 }

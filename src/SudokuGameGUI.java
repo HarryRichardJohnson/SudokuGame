@@ -23,8 +23,8 @@ public class SudokuGameGUI{
                     GB.HideCells(2);
                     GUI.remove(DiffPanel);
                     SwingUtilities.updateComponentTreeUI(GUI);
-                    GUI.add(GB.PrintGameBoardGUI());
-                    GB.menuGUI(GUI);
+                    JPanel grid = GB.PrintGameBoardGUI(GUI);
+                    GUI.add(grid);
                 }
             }
         );
@@ -34,8 +34,8 @@ public class SudokuGameGUI{
                     GB.HideCells(3);
                     GUI.remove(DiffPanel);
                     SwingUtilities.updateComponentTreeUI(GUI);
-                    GUI.add(GB.PrintGameBoardGUI());
-                    GB.menuGUI(GUI);
+                    JPanel grid = GB.PrintGameBoardGUI(GUI);
+                    GUI.add(grid);
                 }
             }
         );
@@ -45,8 +45,8 @@ public class SudokuGameGUI{
                     GB.HideCells(4);
                     GUI.remove(DiffPanel);
                     SwingUtilities.updateComponentTreeUI(GUI);
-                    GUI.add(GB.PrintGameBoardGUI());
-                    GB.menuGUI(GUI);
+                    JPanel grid = GB.PrintGameBoardGUI(GUI);
+                    GUI.add(grid);
 
                 }
             }
@@ -59,5 +59,7 @@ public class SudokuGameGUI{
         GB.PopulateGameBoard();
         Solved.CopyMatrix(GB);
         GUI.setVisible(true);
+
+
     }
 }
