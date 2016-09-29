@@ -357,6 +357,6 @@ public class GameBoard {
 
     private void GBAssignment(char x, char y, char num) {
         this.gameMatrix[x-48][y-48].setNumber(num);
-        PrintGameBoard();
+        //PrintGameBoard();
     }
 }
