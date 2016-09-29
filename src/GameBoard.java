@@ -315,7 +315,7 @@ public class GameBoard {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 JButton Button = new JButton(String.valueOf(this.gameMatrix[i][j].getNumber()));
-                Button.setName(i+j+"");
+                Button.setName(i+""+j);
                 Button.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent e)
@@ -356,7 +356,7 @@ public class GameBoard {
         }
 
     private void GBAssignment(char x, char y, char num) {
-        this.gameMatrix[x][y].setNumber(num);
+        this.gameMatrix[x-48][y-48].setNumber(num);
         PrintGameBoard();
     }
 }
